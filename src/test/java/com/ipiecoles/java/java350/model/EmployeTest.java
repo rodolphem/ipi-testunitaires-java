@@ -146,13 +146,51 @@ public class EmployeTest {
     }
 
     @Test
-    public void testCalculPerformanceCommercialZeroCaTraite(){
+    public void testCalculPerformanceCommercialCaTraiteVautNegatif(){
         //Given
         EmployeService employeService = new EmployeService();
 
-        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("CMATRICULE", -2l, 2l)).hasMessage("Le chiffre d'affaire traité ne peut être négatif ou null !");
-
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("C233", -2l, 2l)).hasMessage("Le chiffre d'affaire traité ne peut être négatif ou null !");
     }
 
+    @Test
+    public void testCalculPerformanceCommercialCaTraiteVautNull(){
+        //Given
+        EmployeService employeService = new EmployeService();
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("C233", null, 2l)).hasMessage("Le chiffre d'affaire traité ne peut être négatif ou null !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialObjectifCaNegatif(){
+        //Given
+        EmployeService employeService = new EmployeService();
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("C1432", 2l, -2l)).hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialObjectifCaNull(){
+        //Given
+        EmployeService employeService = new EmployeService();
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("C1432", 2l, null)).hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialMatriculeStartWithC(){
+        //Given
+        EmployeService employeService = new EmployeService();
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial("P1234", 2l, 2l)).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
+    }
+
+    @Test
+    public void testCalculPerformanceCommercialMatriculeNull(){
+        //Given
+        EmployeService employeService = new EmployeService();
+
+        Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(null, 2l, 2l)).hasMessage("Le matricule ne peut être null et doit commencer par un C !");
+    }
 
 }

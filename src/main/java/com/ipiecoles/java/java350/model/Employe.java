@@ -96,12 +96,14 @@ public class Employe {
     }
 
 
-    //Augmenter salaire
     //fois 1.5 pour 50%, 1.3 pour 30%
+    //Augmenter salaire
     public void augmenterSalaire(double pourcentage){
-        if (pourcentage > 1 && this.getSalaire() != null) {
+        if (salaire == null) { throw new IllegalArgumentException("Le salaire ne peut pas être nul"); }
+        if(pourcentage > 1){
             this.salaire = this.salaire * pourcentage;
         }
+
     }
 
     public Long getId() {
